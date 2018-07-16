@@ -40,7 +40,7 @@ void loop() {
  }
  
  //Neste caso o buzzer toca qnd a distância é menor q 20cm e fica mais agudo qnd é 8cm.
- //Para deixar um unico som padrão, troca a função tone pelo digitalWrite e faz os ajustes nas condições.
+ //Para deixar um único som padrão, troca a função tone por digitalWrite e faz os ajustes nas condições.
  
  if(dist<20&&dist>8){
   //digitalWrite(buzzer,HIGH);
