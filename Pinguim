@@ -1,0 +1,58 @@
+// números dos pinos
+int trigger = 7;
+int eco = 8;
+int buzzer = 11;
+
+// variáveis
+long duracao;
+float dist;
+
+void setup() {
+ pinMode(trigger, OUTPUT); // Configura o pino trigger como saída
+ pinMode(eco, INPUT); // Configura o pino eco como entrada.
+ pinMode(buzzer, OUTPUT);
+ Serial.begin(9600); // Inicia a comunicação serial
+}
+
+void loop() {
+ // Limpa o trigger
+ digitalWrite(trigger, LOW);
+ delayMicroseconds(5);
+
+ // Configurar o trigger para nível alto para transmissão de sinais
+ digitalWrite(trigger, HIGH);
+ delayMicroseconds(10); // tempo para envio do sinal
+ digitalWrite(trigger, LOW);
+
+ //contagem de tempo e lê o pino de eco
+ duracao = pulseIn(eco, HIGH);
+
+ // Calcular a distância
+ dist = duracao * 0.034 / 2;
+
+ // Mostrar a distância no monitor serial
+ if (dist >= 400 || dist <= 2) {
+   Serial.println("Valor fora do alcance");
+ }
+ else {
+   Serial.print("Distancia em cm: ");
+   Serial.println(dist);
+ }
+ 
+ //Neste caso o buzzer toca qnd a distância é menor q 20cm e fica mais agudo qnd é 8cm.
+ //Para deixar um unico som padrão, troca a função tone pelo digitalWrite e faz os ajustes nas condições.
+ 
+ if(dist<20&&dist>8){
+  //digitalWrite(buzzer,HIGH);
+  tone(buzzer,500);
+ }
+ else if(dist<=8){
+  tone(buzzer,300);
+ }
+else{
+  //digitalWrite(buzzer,LOW);
+  noTone(buzzer);
+  }
+ // Aguardar 100ms antes da próxima leitura para evitar interferência
+ delay(100);
+}
