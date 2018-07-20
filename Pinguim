@@ -39,38 +39,22 @@ void loop() {
    Serial.println(dist);
  }
  
- //Neste caso o buzzer começa a tocar qnd a distância é menor q 20cm e fica mais agudo enquanto se aproxima.
- //Para deixar um único som padrão, troca a função tone por digitalWrite e faz os ajustes nas condições(tira os "else if").
+ //Neste caso o buzzer começa a tocar qnd a distância é menor q 30cm e fica mais agudo enquanto se aproxima.
  
- if(dist<20 && dist>=18){
-  //digitalWrite(buzzer,HIGH);
-  tone(buzzer,200);
+ 
+ if(dist<80){
+  
+  tone(buzzer,dist*50);
+  delay(300);
+  noTone(buzzer);
+  delay(300);
  }
- else if(dist<18 && dist>=16){
-  tone(buzzer,300);
- }
- else if(dist<16 && dist>=14){
-  tone(buzzer,380);
- }
-  else if(dist<14 && dist>=12){
-  tone(buzzer,460);
- }
- else if(dist<12 && dist>=10){
-  tone(buzzer,600);
- }
- else if(dist<10 && dist>=7){
-  tone(buzzer,730);
- }
- else if(dist<7 && dist>=5){
-  tone(buzzer,840);
- }
- else if(dist<5 && dist>=2){
-  tone(buzzer,950);
- }
+ 
  else{
   //digitalWrite(buzzer,LOW);
   noTone(buzzer);
  }
+ 
  // Aguardar 100ms antes da próxima leitura para evitar interferência
  delay(100);
 }
