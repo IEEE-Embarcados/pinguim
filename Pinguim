@@ -39,9 +39,7 @@ void loop() {
    Serial.println(dist);
  }
  
- //Neste caso o buzzer começa a tocar qnd a distância é menor q 30cm e fica mais agudo enquanto se aproxima.
- 
- 
+ //Neste caso o buzzer começa a tocar qnd a distância é menor q 80cm e fica mais agudo enquanto se aproxima.
  if(dist<80){
   
   tone(buzzer,dist*50);
